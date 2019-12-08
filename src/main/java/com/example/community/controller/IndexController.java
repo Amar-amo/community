@@ -28,7 +28,7 @@ public class IndexController {
     @GetMapping("/")
     public String Index(HttpServletRequest request,
     @RequestParam(name = "page",defaultValue = "1")int pagenum ) {
-
+        System.out.println("fen");
         IndexPaginationDTO indexPaginationDTO = paginationService.list(pagenum,pagesize);
         request.getSession().setAttribute("pagenum",pagenum);
         request.getSession().setAttribute("pagination", indexPaginationDTO);
