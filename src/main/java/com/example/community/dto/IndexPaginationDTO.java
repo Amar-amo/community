@@ -6,7 +6,7 @@ import java.util.List;
  * @author Amar_amo
  * @date 2019/12/8 2:56
  */
-public class PaginationDTO {
+public class IndexPaginationDTO {
     List<PublishDTO> publishDTOList;
     private int[] nums=new int[10];
     private boolean isFirstPage;
