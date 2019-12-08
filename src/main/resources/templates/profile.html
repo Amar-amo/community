@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
-    <title>码农无码论坛</title>
+    <title th:text="${session.setionName}"></title>
 
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/bootstrap-grid.css">
     <script src="webjars/jquery/3.4.1/jquery.js"></script>
@@ -30,22 +31,32 @@
                     </span>
                 </div>
             </div>
-            <nav >
+            <nav>
                 <ul class="pagination float-right">
-                    <li class="page-item" th:if="${session.pagination.isFirstPage()==false}"><a class="page-link" href="/?page=1" >首页</a></li>
+                    <li class="page-item" th:if="${session.pagination.isFirstPage()==false}"><a class="page-link"
+                                                                                                href="/?page=1">首页</a>
+                    </li>
 
-                    <li class="page-item" th:classappend="${num==session.pagination.getPagenum()} ? active : null " th:each="num:${session.pagination.getNums()}"><a class="page-link" th:href="${'/profile/'}+${session.setionName}+${'/?page='}+${num}" th:text="${num}"></a></li>
+                    <li class="page-item" th:classappend="${num==session.pagination.getPagenum()} ? active : null "
+                        th:each="num:${session.pagination.getNums()}"><a class="page-link"
+                                                                         th:href="${'/profile/'}+${session.setionName}+${'/?page='}+${num}"
+                                                                         th:text="${num}"></a></li>
                     <!--                    <li class="page-item"><a class="page-link" href="#">2</a></li>-->
                     <!--                    <li class="page-item"><a class="page-link" href="#">3</a></li>-->
-                    <li class="page-item" th:if="${session.pagination.isLastPage()==false}"><a class="page-link" th:href="${'/profile/'}+${session.setionName}+${'/?page='}+${session.pagination.getLastpage()}">尾页</a></li>
+                    <li class="page-item" th:if="${session.pagination.isLastPage()==false}"><a class="page-link"
+                                                                                               th:href="${'/profile/'}+${session.setionName}+${'/?page='}+${session.pagination.getLastpage()}">尾页</a>
+                    </li>
                 </ul>
             </nav>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
             <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action" th:classappend="${'个人资料'==session.setionName} ? active : null ">个人资料</a>
-                <a href="#" class="list-group-item list-group-item-action" th:classappend="${'我的发布'==session.setionName} ? active : null " >我的发布</a>
-                <a href="#" class="list-group-item list-group-item-action" th:classappend="${'最新回复'==session.setionName} ? active : null ">最新回复</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                   th:classappend="${'个人资料'==session.setionName} ? active : null ">个人资料</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                   th:classappend="${'我的发布'==session.setionName} ? active : null ">我的发布</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                   th:classappend="${'最新回复'==session.setionName} ? active : null ">最新回复</a>
             </div>
         </div>
     </div>

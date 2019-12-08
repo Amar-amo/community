@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 /**
@@ -31,7 +33,8 @@ public class SigninController {
     }
 
     @PostMapping("/signin")
-    public String signin(HttpServletRequest request) {
+    public String signin(HttpServletRequest request,
+                         HttpServletResponse response) {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         System.out.println(email);
@@ -48,6 +51,7 @@ public class SigninController {
         if (hash_password.equals(get_user.getPassword())) {
             request.getSession().setAttribute("user", get_user);
             String token = UUID.randomUUID().toString();
+            response.addCookie(new Cookie("token", token));
             userMapper.updateByEmail(email,token);
             return "redirect:/";
         } else {

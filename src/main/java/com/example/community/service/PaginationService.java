@@ -20,7 +20,7 @@ import java.util.List;
  * @date 2019/12/7 23:41
  */
 @Service
-public class IndexPaginationService {
+public class PaginationService {
     @Autowired
     private UserMapper userMapper;
     @Autowired

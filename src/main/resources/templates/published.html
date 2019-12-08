@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <title th:text="${session.artical.getTitle()}"></title>
+
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/bootstrap-grid.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <script src="../../webjars/jquery/3.4.1/jquery.js"></script>
+    <script src="../../js/bootstrap.bundle.js" type="application/javascript"></script>
+</head>
+<body>
+<!--名字-->
+<div th:insert="navgation::nav"></div>
+
+
+<div class="container-fluid" style="padding: 80px">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-12" style="border-right: 1px solid #efefef;">
+            <h2 th:text="${session.artical.getTitle()}"></h2>
+            <span style="font-size: 12px ;font-weight: normal;color: #999;">
+                发布者 <span th:text="${session.artical.getUser().getName()}"></span>|
+                发布时间 <span th:text="${session.artical.getCreate_time()}"></span>|
+                阅读数 <span th:text="${session.artical.getView_count()}"></span>|
+            </span>
+            <hr>
+            <span th:text="${session.artical.getDescription()}"></span>
+            <hr>
+            <a href="/publish" class="float-right" th:if="${session.user!=null&&session.user.getId()==session.artical.getUser().getId()}" ><img src="../../img/edit.svg" width="25px" height="25px">编辑 </a>
+            <h2><span th:text="${session.artical.getView_count()}"></span>个回复</h2>
+            <hr>
+<!--            <div class="media" th:each="publish:${session.pagination.getPublishDTOList()}" style="margin: 10px">-->
+<!--                <img th:src="${(publish.getUser().getAvatar_url() != null && !#strings.isEmpty(publish.getUser().getAvatar_url())) ? publish.getUser().getAvatar_url() : '/img/temp.jpg'}"-->
+<!--                     class="mr-3 rounded" style="width: 56px;height: 56px">-->
+<!--                <div class="media-body">-->
+<!--                    <a th:href="${'/published/'}+${publish.getId()}"><h5 class="mt-0" th:text="${publish.getTitle()}" ></h5></a>-->
+<!--                    <span style="font-size: 12px ;font-weight: normal;color: #999;">-->
+<!--                        <span th:text="${publish.getComment_count()}"></span>个回复  •-->
+<!--                        <span th:text="${publish.getView_count()}"></span>次浏览 •发布时间:-->
+<!--                        <span th:text="${publish.getCreate_time()}"></span>-->
+<!--                    </span>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-12" id="second">
+            <h4>发起人</h4>
+            <span th:text="${session.artical.getUser().getName()}"></span>
+            <hr>
+        </div>
+    </div>
+</div>
+</body>
+</html>
