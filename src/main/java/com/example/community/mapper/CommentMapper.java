@@ -17,7 +17,7 @@ import java.util.List;
 @Mapper
 @Repository
 public interface CommentMapper {
-    @Insert("Insert into comment(id,commentator,content,like_count.create_time,modified_time,page_id,read_mark) values (#{id},#{commentator},#{content},#{like_count},#{create_time},#{modified_time},#{page_id},#{read_mark})")
+    @Insert("Insert into comment(id,commentator,content,like_count,create_time,modified_time,page_id,read_mark) values (#{id},#{commentator},#{content},#{like_count},#{create_time},#{modified_time},#{page_id},#{read_mark})")
     void Insert(Comment publish);
 
     @Select("select * from comment where page_id=#{id}")

@@ -2,6 +2,7 @@ package com.example.community.controller;
 
 import com.example.community.dto.PublishDTO;
 import com.example.community.mapper.CommentMapper;
+import com.example.community.mapper.PublishMapper;
 import com.example.community.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,8 @@ import java.util.List;
 public class CommentController {
     @Autowired
     private CommentMapper commentMapper;
-
+    @Autowired
+    private PublishMapper publishMapper;
     @PostMapping("/comment")
     public String Comment(HttpServletRequest request) {
         String content = request.getParameter("content");
@@ -32,6 +34,10 @@ public class CommentController {
         comment.setModified_time(comment.getCreate_time());
         comment.setPage_id(publishDTO.getId());
         commentMapper.Insert(comment);
-        return null;
+        System.out.println(publishDTO.getUser().getId());
+        List<Comment> comments = commentMapper.findByPageId(publishDTO.getId());
+        System.out.println(comments.size());
+        publishMapper.updateCommenCountById(comments.size(),publishDTO.getId());
+        return "redirect:/published/"+publishDTO.getId();
     }
 }

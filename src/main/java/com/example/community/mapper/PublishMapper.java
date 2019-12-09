@@ -26,6 +26,10 @@ public interface PublishMapper {
 
     @Select("select * from publish where id=#{id}")
     Publish getById(@Param("id") long id);
+
     @Update("update publish set title=#{title},description=#{description},modified_time=#{modified_time},tag=#{tag},comment_count=#{comment_count},view_count=#{view_count} where id=#{id}")
     void updateById(Publish publish);
+
+    @Update("update publish set comment_count=#{count} where id = #{id} ")
+    void updateCommenCountById(@Param("count") int count, @Param("id") long id);
 }

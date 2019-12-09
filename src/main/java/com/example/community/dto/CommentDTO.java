@@ -1,5 +1,7 @@
 package com.example.community.dto;
 
+import com.example.community.model.User;
+
 import java.sql.Timestamp;
 
 /**
@@ -10,14 +12,8 @@ public class CommentDTO {
     private long id;
     private long commentator;
     private String content;
-    private long likeCount;
-    private java.sql.Timestamp createTime;
-    private java.sql.Timestamp modifiedTime;
-    private long publishedId;
-    private long readMark;
-    private String avatar_url;
-    private String name;
-    private String bio;
+    private long like_count;
+    private java.sql.Timestamp create_time;
 
     public long getId() {
         return id;
@@ -43,67 +39,57 @@ public class CommentDTO {
         this.content = content;
     }
 
-    public long getLikeCount() {
-        return likeCount;
+    public long getLike_count() {
+        return like_count;
     }
 
-    public void setLikeCount(long likeCount) {
-        this.likeCount = likeCount;
+    public void setLike_count(long like_count) {
+        this.like_count = like_count;
     }
 
-    public Timestamp getCreateTime() {
-        return createTime;
+    public Timestamp getCreate_time() {
+        return create_time;
     }
 
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
+    public void setCreate_time(Timestamp create_time) {
+        this.create_time = create_time;
     }
 
-    public Timestamp getModifiedTime() {
-        return modifiedTime;
+    public Timestamp getModified_time() {
+        return modified_time;
     }
 
-    public void setModifiedTime(Timestamp modifiedTime) {
-        this.modifiedTime = modifiedTime;
+    public void setModified_time(Timestamp modified_time) {
+        this.modified_time = modified_time;
     }
 
-    public long getPublishedId() {
-        return publishedId;
+    public long getPage_id() {
+        return page_id;
     }
 
-    public void setPublishedId(long publishedId) {
-        this.publishedId = publishedId;
+    public void setPage_id(long page_id) {
+        this.page_id = page_id;
     }
 
-    public long getReadMark() {
-        return readMark;
+    public long getRead_mark() {
+        return read_mark;
     }
 
-    public void setReadMark(long readMark) {
-        this.readMark = readMark;
+    public void setRead_mark(long read_mark) {
+        this.read_mark = read_mark;
     }
 
-    public String getAvatar_url() {
-        return avatar_url;
+    public User getUser() {
+        return user;
     }
 
-    public void setAvatar_url(String avatar_url) {
-        this.avatar_url = avatar_url;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getName() {
-        return name;
-    }
+    private java.sql.Timestamp modified_time;
+    private long page_id;
+    private long read_mark;
+    private User user;
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
 }
