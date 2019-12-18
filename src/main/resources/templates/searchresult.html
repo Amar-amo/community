@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <title>搜索结果</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/bootstrap-grid.css">
+    <script src="webjars/jquery/3.4.1/jquery.js"></script>
+    <script src="js/bootstrap.bundle.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body >
+<!--名字-->
+<div th:insert="navgation::nav"></div>
+<div class="container-fluid" style="padding: 80px">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-12" style="border-right: 1px solid #efefef;">
+            <h2><img src="img/indexlist.svg" width="35px" height="35px">发现</h2>
+            <hr>
+            <div class="media" th:each="publish:${session.pagination.getPublishDTOList()}" style="margin: 10px">
+                <img th:src="${(publish.getUser().getAvatar_url() != null && !#strings.isEmpty(publish.getUser().getAvatar_url())) ? publish.getUser().getAvatar_url() : '/img/temp.jpg'}"
+                     class="mr-3 rounded" style="width: 56px;height: 56px">
+                <div class="media-body">
+                    <a th:href="${'/published/'}+${publish.getId()}"><h5 class="mt-0" th:text="${publish.getTitle()}" ></h5></a>
+                    <span style="font-size: 12px ;font-weight: normal;color: #999;">
+                        <span th:text="${publish.getComment_count()}"></span>个回复  •
+                        <span th:text="${publish.getView_count()}"></span>次浏览 •发布时间:
+                        <span th:text="${publish.getCreate_time()}"></span>
+                    </span>
+                </div>
+            </div>
+            <nav >
+                <ul class="pagination float-right">
+                    <li class="page-item" th:if="${session.pagination.isFirstPage()==false}"><a class="page-link" href="/?page=1" >首页</a></li>
+
+                    <li class="page-item" th:classappend="${num==session.pagination.getPagenum()} ? active : null " th:each="num:${session.pagination.getNums()}"><a class="page-link" th:href="${'/?page='}+${num}" th:text="${num}"></a></li>
+<!--                    <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+                    <li class="page-item" th:if="${session.pagination.isLastPage()==false}"><a class="page-link" th:href="${'/?page='}+${session.pagination.getLastpage()}">尾页</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -14,8 +14,8 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="输入你想搜索的" aria-label="Search">
+            <form class="form-inline my-2 my-lg-0" action="/search" method="post">
+                <input class="form-control mr-sm-2" type="search" placeholder="输入你想搜索的"  name="keyword" aria-label="Search">
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">搜索</button>
             </form>
 
@@ -34,7 +34,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/profile/published">个人中心</a>
 <!--                        <a class="dropdown-item" href="/mypublish">我发布的</a>-->
-                        <a class="dropdown-item" href="#">消息中心</a>
+                        <a class="dropdown-item" href="/profile/lastestcomment">消息中心</a>
                         <a class="dropdown-item" href="/loginout">退出登录</a>
                     </div>
                 </li>

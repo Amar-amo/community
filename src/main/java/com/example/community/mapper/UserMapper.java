@@ -4,6 +4,8 @@ import com.example.community.model.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+
 /**
  * @author Amar_amo
  * @date 2019/12/7 0:23
@@ -25,4 +27,10 @@ public interface UserMapper {
     void updateByEmail(@Param("email") String email,@Param("token") String token);
     @Select("select * from user where id =#{id}")
     User findById(@Param("id") long creator);
+    @Update("update user set name=#{name},email=#{email},modified_time=#{modified_time} where id = #{id} ")
+    void updateById(@Param("name") String name, @Param("email") String email, @Param("modified_time") Date modified_time, @Param("id") long id);
+
+    @Update("update user set avatar_url=#{avatar_url},modified_time=#{modified_time} where id = #{id} ")
+    void updateavatarById(@Param("avatar_url") String avatar_url,@Param("modified_time") Date modified_time, @Param("id") long id);
+
 }

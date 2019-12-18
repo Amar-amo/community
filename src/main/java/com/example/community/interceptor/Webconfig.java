@@ -16,8 +16,12 @@ import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
 public class Webconfig implements WebMvcConfigurer {
     @Autowired
     private SessionInterceptor sessionInterceptor;
+    @Autowired
+    private PublishedEditInterceptor publishedEditInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(sessionInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(publishedEditInterceptor).addPathPatterns("/publish");
+
     }
 }

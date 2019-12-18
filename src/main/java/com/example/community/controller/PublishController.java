@@ -26,7 +26,7 @@ public class PublishController {
     private PublishedService publishedService;
 
     @GetMapping("/publish")
-    public String Publish(HttpServletRequest request) {
+    public String Publish() {
         return "publish";
     }
 

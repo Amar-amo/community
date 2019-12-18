@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="../../css/bootstrap.css">
     <link rel="stylesheet" href="../../css/bootstrap-grid.css">
     <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/editormd.css">
     <script src="../../webjars/jquery/3.4.1/jquery.js"></script>
     <script src="../../js/bootstrap.bundle.js" type="application/javascript"></script>
+    <script src="../../js/editormd.min.js"></script>
+
 </head>
 <body>
 <!--名字-->
@@ -26,7 +29,21 @@
                 阅读数 <span th:text="${session.artical.getView_count()}"></span>|
             </span>
             <hr>
-            <span th:text="${session.artical.getDescription()}"></span>
+            <div id="markdown">
+                <textarea  th:text="${session.artical.getDescription()}" style="display: none"></textarea>
+            </div>
+            <script src="../../lib/marked.min.js"></script>
+            <script src="../..//lib/prettify.min.js"></script>
+            <script type="text/javascript">
+                $(function() {
+                    var testView = editormd.markdownToHTML("markdown", {
+                         //markdown : "[TOC]\n### Hello world!\n## Heading 2", // Also, you can dynamic set Markdown text
+                        // htmlDecode : true,  // Enable / disable HTML tag encode.
+                        // htmlDecode : "style,script,iframe",  // Note: If enabled, you should filter some dangerous HTML tags for website security.
+                    });
+                });
+            </script>
+            <!--            <span th:text="${session.artical.getDescription()}"></span>-->
             <hr>
             <a href="/publish" class="float-right"
                th:if="${session.user!=null&&session.user.getId()==session.artical.getUser().getId()}"><img
@@ -59,7 +76,7 @@
             </nav>
 
 
-            <form action="/comment" method="post">
+            <form th:if="${session.user!=null}" action="/comment" method="post">
                 <div class="form-group">
                     <label for="content">发布评论：</label>
                     <textarea class="form-control" required name="content" id="content" cols="30" rows="10"

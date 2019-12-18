@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <title th:text="${session.setionName}"></title>
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/bootstrap-grid.css">
+    <script src="webjars/jquery/3.4.1/jquery.js"></script>
+    <script src="js/bootstrap.bundle.js" type="application/javascript"></script>
+</head>
+<body>
+<!--名字-->
+<div th:insert="navgation::nav"></div>
+<div class="container-fluid" style="padding: 80px">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-12" style="border-right: 1px solid #efefef;">
+            <h2 th:text="${session.setionName}"></h2>
+            <hr>
+            <div class="media" th:each="publish:${session.lastestcomment.getLastCommentDTOList()}" style="margin: 10px">
+                <img th:src="${(publish.getUser().getAvatar_url() != null && !#strings.isEmpty(publish.getUser().getAvatar_url())) ? publish.getUser().getAvatar_url() : '/img/temp.jpg'}"
+                     class="mr-3 rounded" style="width: 56px;height: 56px">
+                <div class="media-body">
+                    <a th:href="${'/published/'}+${publish.getComment().getPage_id()}"><h5 class="mt-0" th:text="${'你的帖子'}+${publish.getUser().getName()}+${'被'}+${publish.getUser().getName()}+${'评论了：'}" ></h5></a>
+                    <span style="font-size: 24px ;font-weight: normal;">
+                        <span th:text="${publish.getComment().getContent()}"></span>
+                    </span>
+                </div>
+            </div>
+            <nav>
+                <ul class="pagination float-right">
+                    <li class="page-item" th:if="${session.lastestcomment.isFirstPage()==false}"><a class="page-link"
+                                                                                                href="/?page=1">首页</a>
+                    </li>
+
+                    <li class="page-item" th:classappend="${num==session.lastestcomment.getPagenum()} ? active : null "
+                        th:each="num:${session.lastestcomment.getNums()}"><a class="page-link"
+                                                                         th:href="${'/profile/'}+${session.setionName}+${'/?page='}+${num}"
+                                                                         th:text="${num}"></a></li>
+                    <!--                    <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+                    <!--                    <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+                    <li class="page-item" th:if="${session.lastestcomment.isLastPage()==false}"><a class="page-link"
+                                                                                               th:href="${'/profile/'}+${session.setionName}+${'/?page='}+${session.pagination.getLastpage()}">尾页</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+            <div class="list-group">
+                <a href="/profile/userdata" class="list-group-item list-group-item-action"
+                   th:classappend="${'个人资料'==session.setionName} ? active : null ">个人资料</a>
+                <a href="/profile/published" class="list-group-item list-group-item-action"
+                   th:classappend="${'我的发布'==session.setionName} ? active : null ">我的发布</a>
+                <a href="/profile/lastestcomment" class="list-group-item list-group-item-action"
+                   th:classappend="${'最新回复'==session.setionName} ? active : null ">最新回复</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

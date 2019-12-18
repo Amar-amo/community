@@ -22,4 +22,7 @@ public interface CommentMapper {
 
     @Select("select * from comment where page_id=#{id}")
     List<Comment> findByPageId(@Param("id") long id);
+
+    @Select("select * from comment where page_id=#{id}")
+    List<Comment> findByPageIdWithOrderBydesc(@Param("id") long id);
 }

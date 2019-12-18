@@ -18,19 +18,27 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 @Component
-public class SessionInterceptor implements HandlerInterceptor {
+public class SessionInterceptor implements HandlerInterceptor
+{
     @Autowired
     private UserMapper userMapper;
+
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception
+    {
         System.out.println("调用拦截器");
         Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("token")) {
+        if (cookies != null)
+        {
+            System.out.println("1");
+            for (Cookie cookie : cookies)
+            {
+                if (cookie.getName().equals("token"))
+                {
                     String token = cookie.getValue();
                     User user = userMapper.findByToken(token);
-                    if (user != null) {
+                    if (user != null)
+                    {
                         System.out.println("验证成功");
                         request.getSession().setAttribute("user", user);
                     }
@@ -42,12 +50,14 @@ public class SessionInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception
+    {
 
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception
+    {
 
     }
 }

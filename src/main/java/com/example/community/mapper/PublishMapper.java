@@ -14,11 +14,12 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface PublishMapper {
+public interface PublishMapper
+{
     @Insert("Insert into publish(title,description,creator,create_time,modified_time,comment_count,view_count,like_count,tag) values (#{title},#{description},#{creator},#{create_time},#{modified_time},#{comment_count},#{view_count},#{like_count},#{tag})")
     void Insert(Publish publish);
 
-    @Select("select * from publish")
+    @Select("select * from publish order by create_time desc")
     List<Publish> list();
 
     @Select("select * from publish where creator=#{id}")
@@ -31,5 +32,8 @@ public interface PublishMapper {
     void updateById(Publish publish);
 
     @Update("update publish set comment_count=#{count} where id = #{id} ")
-    void updateCommenCountById(@Param("count") int count, @Param("id") long id);
+    void updateCommentCountById(@Param("count") int count, @Param("id") long id);
+
+    @Select("select * from publish where title like #{keyword}")
+    List<Publish> getByKyeword(@Param("keyword") String keyword);
 }

@@ -49,6 +49,7 @@ public class SignupController {
         user.setCreate_time(new Date(System.currentTimeMillis()));
         user.setModified_time(user.getCreate_time());
         userMapper.Insert(user);
+
         return "redirect:signin";
 
     }
